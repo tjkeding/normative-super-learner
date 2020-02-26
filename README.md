@@ -28,7 +28,7 @@ Notes on CSV file format:
 - Column 1 (index 0) contains the instance/subject ID
 - Column 2 contains the continuous, real-valued label to be predicted
 - Columns 3...N contain the feature values, with the column header containing the feature label
-- For the \<predCSVFile\>, Column 3 instead contains the atypical group label, and Columns 4...N contain the feature values
+- For the \<predCSVFile\>, Column 3 instead contains the atypical group labels, and Columns 4...N contain the feature values
   
 **Output**:  
 {prefix}\_errors\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}\_simsNPS{numSims_NPS}.csv
