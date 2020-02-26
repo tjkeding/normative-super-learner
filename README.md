@@ -1,7 +1,7 @@
 # normative-super-learner
 A tool to build and interrogate a normative prediction model<sup>1</sup> for any continuous, real-valued variable. 
 
-**Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels
+**Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels  
 **Input**: python3 normative-super-learner.py <trainCSVFile> <evalCSVFile> <predCSVFile> <model> <kCV_paramSearch> <numIter_paramSearch> <numSims_MB> <numSims_NPS> <pThresh> <numCores> <prefix>  
 
 *<trainCSVFile>*: file path to the normative training set in CSV format  
