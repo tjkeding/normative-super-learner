@@ -1,6 +1,8 @@
 # normative-super-learner
 A tool to build and interrogate a normative prediction model<sup>1</sup> for any continuous, real-valued variable. 
 
+## Implementation:
+
 **Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels  
 
 **Input**:  
@@ -48,6 +50,7 @@ Notes on CSV file format:
 - Saved Super Learner model output from Joblib: contains a dictionary with keys 'models' (trained submodels from Scikit-Learn) and 'coefficients' (coefficients associated with predictions from each submodel)
 - Can be accessed with *joblib.load(superLearnerFile)*
 
+## Analysis Summary:
 The analysis pipeline consists of:
 
 ### Normative Modeling
