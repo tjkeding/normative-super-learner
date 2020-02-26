@@ -1,6 +1,8 @@
 # normative-super-learner
 A tool to build and interrogate a normative prediction model<sup>1</sup> for any continuous, real-valued variable. 
 
+**Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels
+
 The analysis pipeline consists of:
 
 ### Normative Modeling
