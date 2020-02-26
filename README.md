@@ -61,21 +61,21 @@ The analysis pipeline consists of:
 ------
 1) Multiple machine learning algorithms\* (submodels) are tuned and trained on a normative sample displaying some baseline reference phenotype (e.g. "healthy", "no disease", "typically-developing")<sup>1</sup>. 
 2) Prediction models are aggregated into a super learner<sup>2,3</sup>, a linear combination of submodel predictions optimizing the same loss function, implemented as a ridge regression model with no intercept. 
-3) The super learner is tuned, trained on the full normative training sample, and evaluated using Pearson correlation on a normative evaluation set.
+3) The super learner is tuned, trained on the full normative training sample, and evaluated using permutation testing and Pearson correlation on the normative evaluation/validation set.
 4) All optimized/trained submodels and the super learner are saved (using *JobLib*) and performance statistics are output.
 
-\*Available models include random forest, gradient boosting machine (boosted trees), multilayer perceptron, support vector machine, and ridge regression linear model. All algorithms are implemented using *NumPy*, *SciPy*, and *SciKit-Learn*, with many more to come.
+\*Available models include random forest, gradient boosting machine (boosted trees), multilayer perceptron, support vector machine, and ridge regression linear model. All algorithms are implemented using *SciPy*, *Statsmodels*, and *SciKit-Learn*, with many more to come.
 
 ### Calculate Atypical Deviations 
 ------
-1) The normative super learner is used to make predictions in an 'atypical' sample displaying some phenotype-of-interest (eg. "symptomatic", "disease present"). Multiple atypical samples (phenotypes) can be predicted simultaneously.
+1) The normative super learner is used to make predictions in an 'atypical' sample displaying some phenotype-of-interest (eg. "symptomatic", "disease present"). Multiple atypical samples (phenotypes) can be predicted simultaneously, but should be labeled as separate groups in the CSV file (column 3)
 2) Predictions for the atypical sample/s are used to calculate phenotype-specific deviations from the normative prediction (e.g. BrainAGE<sup>4</sup>)
 3) Atypical sample predictions and deviations are output.
 
 ### Feature Influence on Deviations
 ------
 1) A univariate noise perturbation sensitivity (NPS)<sup>5</sup> analysis is used to interogate the magnititue and direction of feature influence on atypical deviations from the normative model. NPS is a feature-wise metric representing how sensitive group-level deviations from normative prediction are to the atypical phenotype.
-2) Feature influence is thresholded using the paired-samples Wilcoxon test (perturbed deviation distribution vs. true deviation distribution) corrected for multiple comparisons using the Benjamini and Hochberg method. Features influencing non-significant differences in deviation distribution (based on the phenotype-of-interest OR by-chance) are considered non-influencial.
+2) Feature influence is thresholded using the paired-samples Wilcoxon test (perturbed deviation distribution vs. true deviation distribution) corrected for multiple comparisons using the Benjamini and Hochberg method. Features influencing non-significant differences in deviation distribution (based on the phenotype-of-interest OR by-chance during permutation testing) are considered non-influencial.
 3) All feature influence scores, direction of influence (increasing or decreasing deviations from the norm), and associated descriptive statistics (distribution medians, Wilcoxon statistic, effect size) are output locally.
 
 More detailed information to come! For specific questions, contact tjkeding@gmail.com.
