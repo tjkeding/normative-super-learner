@@ -3,18 +3,19 @@ A tool to build and interrogate a normative prediction model<sup>1</sup> for any
 
 **Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels  
 **Input**:  
-python3 normative-super-learner.py <trainCSVFile> <evalCSVFile> <predCSVFile> <model> <kCV_paramSearch> <numIter_paramSearch> <numSims_MB> <numSims_NPS> <pThresh> <numCores> <prefix>  
+python3 normative-super-learner.py \<trainCSVFile\> \<evalCSVFile\> \<predCSVFile\> \<model\> \<kCV_paramSearch\> \<numIter_paramSearch\> \<numSims_MB\> \<numSims_NPS\> \<pThresh\> \<numCores\> \<prefix\>  
+
 *\<trainCSVFile\>*: file path to the normative training set in CSV format  
-*\<evalCSVFile>*: file path to the normative evaluation/validation set in CSV format  
-*<predCSVFile>*: file path to the atypical prediction/test set in CSV format  
-*<model>*: submodel/s algorithms to use in the Super Learner, currently available: "randForest", "mlp", "svm", "glm", "gradBoost", "all"  
-*<kCV_paramSearch>*: number of cross-validation folds to use when tuning hyperparameters in randomized search  
-*<numIter_paramSearch>*: number of test iterations to use when tuning hyperparameters in randomized search  
-*<numSims_MB>*: number of random initiations/simulations to use during model building  
-*<numSims_NPS>*: number of random initiations/simulations to use during noise perturbation sensitivity (NPS) analysis  
-*<pThresh>*: significance threshold for paired samples Wilcoxon tests and false discovery rate correction  
-*<numCores>*: number of cores to use for parallel computing  
-*<prefix>*: string for prefix to append to all output files  
+*\<evalCSVFile\>*: file path to the normative evaluation/validation set in CSV format  
+*\<predCSVFile\>*: file path to the atypical prediction/test set in CSV format  
+*\<model\>*: submodel/s algorithms to use in the Super Learner, currently available: "randForest", "mlp", "svm", "glm", "gradBoost", "all"  
+*\<kCV_paramSearch\>*: number of cross-validation folds to use when tuning hyperparameters in randomized search  
+*\<numIter_paramSearch\>*: number of test iterations to use when tuning hyperparameters in randomized search  
+*\<numSims_MB\>*: number of random initiations/simulations to use during model building  
+*\<numSims_NPS\>*: number of random initiations/simulations to use during noise perturbation sensitivity (NPS) analysis  
+*\<pThresh\>*: significance threshold for paired samples Wilcoxon tests and false discovery rate correction  
+*\<numCores\>*: number of cores to use for parallel computing  
+*\<prefix\>*: string for prefix to append to all output files  
    
 Example:  
 python3 normative-super-learner.py trainFile.csv evalFile.csv predFile.csv all 10 1000 100 1000 0.05 50 outputPrefix
@@ -24,7 +25,7 @@ Notes on CSV file format:
 - Column 1 (index 0) contains the instance/subject ID
 - Column 2 contains the continuous, real-valued label to be predicted
 - Columns 3...N contain the feature values, with the column header containing the feature label
-- For the <predCSVFile>, Column 3 instead contains the atypical group label, and Columns 4...N contain the feature values
+- For the \<predCSVFile\>, Column 3 instead contains the atypical group label, and Columns 4...N contain the feature values
   
 **Output**:
 {prefix}\_errors\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}\_simsNPS{numSims_NPS}.csv
