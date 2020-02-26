@@ -20,7 +20,7 @@ python3 normative-super-learner.py \<trainCSVFile\> \<evalCSVFile\> \<predCSVFil
 Example:  
 python3 normative-super-learner.py trainFile.csv evalFile.csv predFile.csv all 10 1000 100 1000 0.05 50 outputPrefix
 
-Notes on CSV file format:
+Notes on CSV file format:  
 - Rows should be one per instance/subject
 - Column 1 (index 0) contains the instance/subject ID
 - Column 2 contains the continuous, real-valued label to be predicted
