@@ -2,6 +2,7 @@
 A tool to build and interrogate a normative prediction model<sup>1</sup> for any continuous, real-valued variable. 
 
 **Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels  
+
 **Input**:  
 python3 normative-super-learner.py \<trainCSVFile\> \<evalCSVFile\> \<predCSVFile\> \<model\> \<kCV_paramSearch\> \<numIter_paramSearch\> \<numSims_MB\> \<numSims_NPS\> \<pThresh\> \<numCores\> \<prefix\>  
 
@@ -27,7 +28,7 @@ Notes on CSV file format:
 - Columns 3...N contain the feature values, with the column header containing the feature label
 - For the \<predCSVFile\>, Column 3 instead contains the atypical group label, and Columns 4...N contain the feature values
   
-**Output**:
+**Output**:  
 {prefix}\_errors\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}\_simsNPS{numSims_NPS}.csv
 - Normative model deviations for each instance in the normative evalution and atypical prediction/test sets
 - Rows: individuals/instances
