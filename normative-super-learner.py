@@ -215,7 +215,6 @@ def compileGroupErrs(SL,groupDFs,evalDF,trainDF,errors,labelCol,startOfFeats):
 
     return errorsOut
 
-
 # ========================================= PROCESSING, SCALING, & STATS TOOLS ==========================================
 
 def getScore(true,pred):
@@ -266,9 +265,7 @@ def MCC(statsDF,groups,pThresh):
     outDF = outDF.loc[outDF['NEG_P']<pThresh]
     outDF = outDF.loc[outDF['POS_P']<pThresh]
 
-    return outDF
-
- # --------------------   
+    return outDF 
 
 # --------------------
 
