@@ -6,7 +6,9 @@ A tool to build and interrogate a normative prediction model<sup>1</sup> for any
 **Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels  
 
 **Input**:  
-```python3 normative-super-learner.py <trainCSVFile> <evalCSVFile> <predCSVFile> <model> <kCV_paramSearch> <numIter_paramSearch> <numSims_MB> <numSims_NPS> <pThresh> <numCores> <prefix>```  
+```
+python3 normative-super-learner.py <trainCSVFile> <evalCSVFile> <predCSVFile> <model> <kCV_paramSearch> <numIter_paramSearch> <numSims_MB> <numSims_NPS> <pThresh> <numCores> <prefix>
+```  
 
 - *\<trainCSVFile\>*: file path to the normative training set in CSV format  
 - *\<evalCSVFile\>*: file path to the normative evaluation/validation set in CSV format  
@@ -21,7 +23,9 @@ A tool to build and interrogate a normative prediction model<sup>1</sup> for any
 - *\<prefix\>*: string for prefix to append to all output files  
    
 Example:  
-```python3 normative-super-learner.py trainFile.csv evalFile.csv predFile.csv all 10 1000 100 1000 0.05 50 outputPrefix```
+```
+python3 normative-super-learner.py trainFile.csv evalFile.csv predFile.csv all 10 1000 100 1000 0.05 50 outputPrefix
+```
 
 Notes on CSV file format:  
 - Rows should be one per instance/subject
