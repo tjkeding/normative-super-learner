@@ -51,7 +51,7 @@ Notes on CSV file format:
 - Columns: algorithm name (MODEL), mean absolute error on the normative evaluation/validation set (EVAL_MAE), performance difference relative to by-chance performance (DIFF_FROM_CHANCE), correlation coefficient from Pearson testing prediction versus true label (PEARSON_R), probability value of the correlation coefficient (R_P)
 
 {prefix}\_superLearner\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}
-- Saved Super Learner model output from Joblib: contains a dictionary with keys 'models' (trained submodels from Scikit-Learn) and 'coefficients' (coefficients associated with predictions from each submodel)
+- Saved super learner model output from Joblib: contains a dictionary with keys 'models' (trained submodels from Scikit-Learn) and 'coefficients' (coefficients associated with predictions from each submodel)
 - Can be accessed with *joblib.load(superLearnerFile)*
 
 ## Analysis Summary:
