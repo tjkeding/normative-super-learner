@@ -2,6 +2,48 @@
 A tool to build and interrogate a normative prediction model<sup>1</sup> for any continuous, real-valued variable. 
 
 **Dependencies**: Python3, Joblib, Scikit-Learn, Numpy, Pandas, SciPy, Statsmodels
+**Input**: python3 normative-super-learner.py <trainCSVFile> <evalCSVFile> <predCSVFile> <model> <kCV_paramSearch> <numIter_paramSearch> <numSims_MB> <numSims_NPS> <pThresh> <numCores> <prefix>
+  
+*<trainCSVFile>*: file path to the normative training set in CSV format 
+*<evalCSVFile>*: file path to the normative evaluation/validation set in CSV format
+*<predCSVFile>*: file path to the atypical prediction/test set in CSV format
+*<model>*: submodel/s algorithms to use in the Super Learner, currently available: "randForest", "mlp", "svm", "glm", "gradBoost", "all"
+*<kCV_paramSearch>*: number of cross-validation folds to use when tuning hyperparameters in randomized search
+*<numIter_paramSearch>*: number of test iterations to use when tuning hyperparameters in randomized search
+*<numSims_MB>*: number of random initiations/simulations to use during model building
+*<numSims_NPS>*: number of random initiations/simulations to use during noise perturbation sensitivity (NPS) analysis
+*<pThresh>*: significance threshold for paired samples Wilcoxon tests and false discovery rate correction
+*<numCores>*: number of cores to use for parallel computing
+*<prefix>*: string for prefix to append to all output files
+ 
+Example: python3 normative-super-learner.py trainFile.csv evalFile.csv predFile.csv all 10 1000 100 1000 0.05 50 outputPrefix
+
+Notes on CSV file format:
+- Rows should be one per instance/subject
+- Column 1 (index 0) contains the instance/subject ID
+- Column 2 contains the continuous, real-valued label to be predicted
+- Columns 3...N contain the feature values, with the column header containing the feature label
+- For the <predCSVFile>, Column 3 instead contains the atypical group label, and Columns 4...N contain the feature values
+  
+**Output**:
+{prefix}\_errors\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}\_simsNPS{numSims_NPS}.csv
+- Normative model deviations for each instance in the normative evalution and atypical prediction/test sets
+- Rows: individuals/instances
+- Columns: subject ID (SUBJ), normative/atypical group label (GROUP), value to predict (LABEL), normative deviation (ERR)
+
+{prefix}\_featInfNPS\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}\_simsNPS{numSims_NPS}.csv
+- Feature influence statistics for each feature/column in the input CSV files
+- Rows: features
+- Columns: feature label (FEAT), normative/atypical group label (GROUP), direction of feature influence (DIR; either "INCREASE" or "DECREASE"), median of perturbed deviation distribution (MEDIAN), differnce between median of perturbed deviation distribution and median of true deviation distribution (DIFF), Wilcoxon statistic (STAT), effect size of comparison (RSQUARED), raw probability value of comparison (NEG_P), raw probability value of by-chance perturbed deviation distribution compared to true deviation distribution (POS_P), FDR corrected NEG_P value (NEG_P_FDR), FDR corrected POS_P value (POS_P_FDR)
+
+{prefix}\_modelPerformances\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}\_simsNPS{numSims_NPS}.csv
+- Super learner and submodel performance metrics
+- Rows: super learner and all submodels
+- Columns: algorithm name (MODEL), mean absolute error on the normative evaluation/validation set (EVAL_MAE), performance difference relative to by-chance performance (DIFF_FROM_CHANCE), correlation coefficient from Pearson testing prediction versus true label (PEARSON_R), probability value of the correlation coefficient (R_P)
+
+{prefix}\_superLearner\_{PRED_VAR_NAME}\_cv{kCV_paramSearch}
+- Saved Super Learner model output from Joblib: contains a dictionary with keys 'models' (trained submodels from Scikit-Learn) and 'coefficients' (coefficients associated with predictions from each submodel)
+- Can be accessed with *joblib.load(superLearnerFile)*
 
 The analysis pipeline consists of:
 
